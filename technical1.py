@@ -17,28 +17,26 @@ def question1(txt, pat):
             mid = (low + high) / 2 # Calculate the middle value between low and high
             s_chr = list_str[mid]  # Middle string chr to compare. 
             p_chr = pat[i] # String character of the pattern to compare.
-            if s_chr == p_chr: # If the two characters match
+            if s_chr == p_chr and high-low > j: # If the two characters match
                 # only count it as a match if the length between high and low is greater than
-                # the number of characters already matched.  In other words, the letter cannot be part
-                # of an anagram if it is found between a larger range than the total matching letters
-                # already found.
-                if high - low > j: # Only count it as a true match if the length between characters
-                    j += 1 # we have a match.  Increment by anagram length by 1
-                    low = 0 # Set low to 0
-                    high = len(list_str) - 1 # Lower the high range by 1
-                    break
+                # the number of characters already matched.  In other words, the match can only be
+                # considered if it is of greater length than the already found matched string.
+                j += 1 # we have a match.  Increment by anagram length by 1
+                low = 0 # Set low to 0
+                high = len(list_str) - 1 # Lower the high range by 1
+                break
             elif (s_chr < p_chr): # If string character is of lesser value than pattern, we need to increment low
                 low = mid + 1 # Set the low to the next character which is mid + 1
             else: # String character is greater value than pattern character, thus set high to middle -1
                 high = mid - 1 
-    if j == p:
-        return True
+    if j == p: 
+        return True # We have a match because the # of characters matched equals pattern length.
     return False
 
 
 def testQ1():
     print "Q1 Test1: expected outcome False"
-    print "Outcome : " + str(question1("udacity", "uy"))
+    print "Outcome : " + str(question1("udacity", "ud"))
     print "Q1 Test2: expected outcome True"
     print "Outcome : " + str(question1("udacity", "ac"))
     print "Q1 Test3: expected outcome False"
