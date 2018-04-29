@@ -10,7 +10,7 @@ def question1(txt, pat):
 
     low = 0 # the start of the range of characters we are examining.
     high = len(list_str) - 1 # the ending range of characters we are examining
-    j = 1 # represents 1 less than the minimum length needed for an anagram
+    j = 0 # represents 1 less than the minimum length needed for an anagram
 
     for i in xrange(0, p):
         while (low <= high): # We only continue if low position is less or equal to high position.
@@ -18,7 +18,11 @@ def question1(txt, pat):
             s_chr = list_str[mid]  # Middle string chr to compare. 
             p_chr = pat[i] # String character of the pattern to compare.
             if s_chr == p_chr: # If the two characters match
-                if high - low > j:  # Only count the letter if 
+                # only count it as a match if the length between high and low is greater than
+                # the number of characters already matched.  In other words, the letter cannot be part
+                # of an anagram if it is found between a larger range than the total matching letters
+                # already found.
+                if high - low > j: # Only count it as a true match if the length between characters
                     j += 1 # we have a match.  Increment by anagram length by 1
                     low = 0 # Set low to 0
                     high = len(list_str) - 1 # Lower the high range by 1
@@ -33,12 +37,12 @@ def question1(txt, pat):
 
 
 def testQ1():
-    print "Q1 Test1: expected outcome True"
+    print "Q1 Test1: expected outcome False"
     print "Outcome : " + str(question1("udacity", "uy"))
-    print "Q1 Test2: expected outcome False"
-    print "Outcome : " + str(question1("udacity", "yz"))
+    print "Q1 Test2: expected outcome True"
+    print "Outcome : " + str(question1("udacity", "ac"))
     print "Q1 Test3: expected outcome False"
-    print "Outcome : " + str(question1("udacity", "cily"))
+    print "Outcome : " + str(question1("udacity", "dc"))
 
 
 testQ1()
