@@ -5,6 +5,7 @@
 # list and m is the "mth number from the end". You should copy/paste the Node class below to
 # use as a representation of a node in the linked list. Return the value of the node at that position.
 
+
 class Node(object):
     def __init__(self, value):
         self.value = value
@@ -26,19 +27,43 @@ class LinkedList(object):
 
 def question5(first, m):
 
-    ll_array = []
+    if first == None:
+        return False
+    
+    if not isinstance(first, Node):
+        return False
 
+    
+
+    length = 0
+    
+    # Traverse the list to find the length
     current = first
     while current is not None:
-        ll_array.append(current.value)
+        length += 1
         current = current.next
 
-    result = ll_array[-m] 
+    # Calculate the target
+    target = length - m + 1
 
-    return result
-
+    # Traverse the list again and return the target node
+    pos = 1
+    current = first
+    while current is not None:
+        while pos < target:
+            pos += 1
+            current = current.next
+        return current
+    
 
 def test5():
+
+    print "Q5 Test1 (Edge case) null input: expected outcome False"
+    print "Outcome : " + str(question5(None, 1))
+
+    print "Q5 Test2 (Edge case) passing string value: expected outcome False"
+    print "Outcome : " + str(question5("hello", 1))
+
     e1 = Node(1)
     e2 = Node(2)
     e3 = Node(3)
@@ -54,9 +79,9 @@ def test5():
     
     m = 3
 
-    expected = 3
-
-    print "Case 1 : ", "Pass" if question5(e1,m) == expected else "False"
+    expected = e3
+    print "Q5 Test3: expected outcome True"
+    print "Outcome : ", "True" if question5(e1,m) == expected else "False"
 
     ll = None
 
@@ -89,10 +114,10 @@ def test5():
     ll.append(e12)
     ll.append(e13)
 
-    m = 8
+    m = 1
 
-    expected = 8
-
-    print "Case 2 : ", "Pass" if question5(e1,m) == expected else "False"
+    expected = e13
+    print "Q5 Test4: expected outcome True"
+    print "Outcome : ", "True" if question5(e1,m) == expected else "False"
 
 test5()

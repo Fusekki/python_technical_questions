@@ -97,6 +97,15 @@ def KruskalMST(graph, V):
 
 
 def question3(G):
+    
+    # Edge case for null value
+    if G == None:
+        return False
+
+    #Edge case for type:
+    if type(G) is not dict:
+        return False
+
     vert_len = len(G)
     graph = Graph(vert_len)
 
@@ -119,12 +128,19 @@ def str_to_int(s):
 
 
 def test3():
+
+    print "Q3 Test1 (Edge case) null input: expected outcome False"
+    print "Outcome : " + str(question3(None))
+
+    print "Q3 Test2 (Edge case) passing string value: expected outcome False"
+    print "Outcome : " + str(question3("hello"))
+
+
     g =  {'A': [('B', 2)], 'B': [('A', 2), ('C', 5)], 'C': [('B', 5)]}
     expected = {0: [(1, 2)], 1: [(2, 5)]}
     
-    print "Testing 3"
-    print "g = " + str(g)
-    print "Case (example case):", "Pass" if question3(g) == expected else "Fail" 
+    print "Q3 Test3 (Example case): expected outcome True" 
+    print "Outcome : ", "True" if question3(g) == expected else "False" 
 
     G = { 0: [(1, 2), (4, 6)], 
     1: [(0, 2), (2, 3), (3, 8), (4, 5)],
@@ -133,8 +149,7 @@ def test3():
     4: [(1, 5), (2, 7), (3, 9)] }
 
     expected = {0: [(1, 2), (4, 6)], 1: [(2, 3), (3, 8)]}
-
-    print "G = " + str(G)
-    print "Case (G):", "Pass" if question3(G) == expected else "Fail" 
+    print "Q3 Test4: expected outcome True"
+    print "Outcome : ", "True" if question3(G) == expected else "False" 
 
 test3()

@@ -5,6 +5,14 @@
 
 def question2(string):
 
+    # Edge Case for type
+    if type(string) is not str:
+        return None
+
+    # Edge case for length
+    if len(string) == 0:
+        return None
+
     length  = 1
     start = 0
     low = 0
@@ -12,7 +20,7 @@ def question2(string):
 
     s_len = len(string)
 
-    for x in xrange(1, s_len):
+    for x in xrange(1, s_len):  # O(n - 1)
         # First loop. Compare letters adjacent
         low = x - 1
         high = x
@@ -41,11 +49,18 @@ def question2(string):
 
     
 def testQ2():
-    print "Q2 Test1: expected outcome aba"
+
+    print "Q2 Test1 (Edge case) null input: expected outcome False"
+    print "Outcome : " + str(question2(""))
+
+    print "Q1 Test2 (Edge case) passing integer value: expected outcome False"
+    print "Outcome : " + str(question2(123))
+
+    print "Q2 Test3: expected outcome aba"
     print "Outcome : " + str(question2("aba"))
-    print "Q2 Test2: expected outcome ll"
+    print "Q2 Test4: expected outcome ll"
     print "Outcome : " + str(question2("hello"))
-    print "Q2 Test3: expected outcome None"
+    print "Q2 Test5: expected outcome None"
     print "Outcome : " + str(question2("washington"))
 
 

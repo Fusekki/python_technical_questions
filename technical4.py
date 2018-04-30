@@ -22,15 +22,6 @@
 #           4)
 # and the answer would be 3.
 
-# We are using the BST class from the tutorial:
-
-class BST(object):
-    def __init__(self, value):
-        self.value = value
-        self.left = None
-        self.right = None
-
-
 def find_children(n):
     children = []
     node = n
@@ -57,7 +48,6 @@ def find_children(n):
 def find_right(n):
     children = find_children(n)
     # Return the second value
-    
     return children[1]
 
 
@@ -69,13 +59,14 @@ def find_left(n):
 
 def question4(T, r, n1, n2):
 
-    node_index = r
-    # Create the tree with the specified root
-    tree = BST(node_index)
-    # We are going to  start with the root row first
-    node = T[node_index]
+    if T == None:
+        return False
 
-    n_len = len(node)
+    if type(T) is not list:
+        return False
+
+    node_index = r
+    node = T[node_index]
 
     while find_left(node) is not None or find_right(node) is not None:  
         if node_index > n1 and node_index > n2:
@@ -94,6 +85,13 @@ def question4(T, r, n1, n2):
 
 
 def test4():
+
+    print "Q4 Test1 (Edge case) null input: expected outcome False"
+    print "Outcome : " + str(question4(None, 1, 2, 3))
+
+    print "Q4 Test2 (Edge case) passing string value: expected outcome False"
+    print "Outcome : " + str(question4("hello", 1, 2, 3 ))
+    
     M = [[0, 1, 0, 0, 0], 
         [0, 0, 0, 0, 0], 
         [0, 0, 0, 0, 0], 
@@ -105,8 +103,8 @@ def test4():
     node1 = 1
     node2 = 4
     expected = 3
-
-    print "Case (" + str(M) + "): ", "Pass" if question4(M, root, node1, node2) == expected else "Fail"
+    print "Q4 Test 3: expected outcome True"
+    print "Outcome: ", "True" if question4(M, root, node1, node2) == expected else "False"
 
     # Example tree:
     #        5
@@ -127,7 +125,7 @@ def test4():
     node2 = 4
 
     expected = 1
-
-    print "Case (" + str(M) + "): ", "Pass" if question4(M, root, node1, node2) == expected else "Fail"
+    print "Q4 Test 4: expected outcome True"
+    print "Outcome: ", "True" if question4(M, root, node1, node2) == expected else "False"
         
 test4()
